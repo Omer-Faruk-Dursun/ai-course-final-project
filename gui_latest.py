@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# Auto generated gui code using QTDesigner
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QTableWidgetItem
 
@@ -46,14 +46,14 @@ class Ui_MainWindow(object):
         self.label_6 = QtWidgets.QLabel(self.classifiers_tab)
         self.label_6.setGeometry(QtCore.QRect(20, 10, 221, 31))
         self.label_6.setObjectName("label_6")
-        
+
         self.button_select_csv = QtWidgets.QPushButton(self.classifiers_tab)
         self.button_select_csv.setGeometry(QtCore.QRect(680, -10, 111, 28))
         self.button_select_csv.setObjectName("button_select_csv")
-        
+
         # Button event
         self.button_select_csv.clicked.connect(self.button_signal_select_csv)
-        
+
         self.decision_tree_acc_label = QtWidgets.QLabel(self.classifiers_tab)
         self.decision_tree_acc_label.setGeometry(QtCore.QRect(610, 80, 91, 51))
         self.decision_tree_acc_label.setObjectName("decision_tree_acc_label")
@@ -66,40 +66,40 @@ class Ui_MainWindow(object):
         self.rf_acc_label = QtWidgets.QLabel(self.classifiers_tab)
         self.rf_acc_label.setGeometry(QtCore.QRect(610, 150, 91, 51))
         self.rf_acc_label.setObjectName("rf_acc_label")
-        
+
         self.submit_custom_input = QtWidgets.QPushButton(self.classifiers_tab)
         self.submit_custom_input.setGeometry(QtCore.QRect(20, 540, 111, 28))
         self.submit_custom_input.setObjectName("submit_custom_input")
-        
+
         # Button event
         self.submit_custom_input.clicked.connect(self.button_signal_submit_custom_input)
-        
+
         self.nb_classify = QtWidgets.QPushButton(self.classifiers_tab)
         self.nb_classify.setGeometry(QtCore.QRect(280, 80, 71, 51))
         self.nb_classify.setObjectName("nb_classify")
         # Button event
         self.nb_classify.clicked.connect(self.naive_bayes_classify)
-        
+
         self.knn_classify = QtWidgets.QPushButton(self.classifiers_tab)
         self.knn_classify.setGeometry(QtCore.QRect(280, 150, 71, 51))
         self.knn_classify.setObjectName("knn_classify")
          # Button event
         self.knn_classify.clicked.connect(self.k_nearst_neighbour_classify)
-        
+
         self.decision_tree_classify = QtWidgets.QPushButton(self.classifiers_tab)
         self.decision_tree_classify.setGeometry(QtCore.QRect(720, 80, 71, 51))
         self.decision_tree_classify.setObjectName("decision_tree_classify")
         # Button event
         self.decision_tree_classify.clicked.connect(self.sklearn_decision_tree_classify)
-        
-        
+
+
         self.rf_classify = QtWidgets.QPushButton(self.classifiers_tab)
         self.rf_classify.setGeometry(QtCore.QRect(720, 150, 71, 51))
         self.rf_classify.setObjectName("rf_classify")
         # Button event
         self.rf_classify.clicked.connect(self.sklearn_rf_classify)
-        
-        
+
+
         self.label = QtWidgets.QLabel(self.classifiers_tab)
         self.label.setGeometry(QtCore.QRect(20, 60, 131, 16))
         self.label.setObjectName("label")
@@ -161,15 +161,15 @@ class Ui_MainWindow(object):
         self.pushButton.setObjectName("pushButton")
         # Button event
         self.pushButton.clicked.connect(self.fill_the_table)
-        
-        
+
+
         self.pushButton_2 = QtWidgets.QPushButton(self.image_frame)
         self.pushButton_2.setGeometry(QtCore.QRect(200, 10, 93, 21))
         self.pushButton_2.setObjectName("pushButton_2")
         # Button event
         self.pushButton_2.clicked.connect(self.plot_data)
-        
-    
+
+
         self.tableWidget = QtWidgets.QTableWidget(self.image_frame)
         self.tableWidget.setGeometry(QtCore.QRect(20, 40, 781, 651))
         self.tableWidget.setObjectName("tableWidget")
@@ -183,7 +183,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        
+
     # Signal Function for Select CSV button
     def button_signal_select_csv(self):
         filename = QFileDialog.getOpenFileName()
@@ -191,7 +191,7 @@ class Ui_MainWindow(object):
         if path is not None:
             self.flag = 1
             self.pre_process(path)
-    
+
     # Function that initiates pre-process
     def pre_process(self, path):
         self.df = self.main.read_csv(path)
@@ -199,8 +199,8 @@ class Ui_MainWindow(object):
         self.word_dictionary = self.main.dictionary(self.df)
         X, y = self.main.vectorize(self.df, self.word_dictionary)
         self.X_train, self.X_test, self.y_train, self.y_test = self.main.test_train_split(X, y)
-        
-        
+
+
     def naive_bayes_classify(self):
         nb = NaiveBayesClassifier()
         nb.train(self.X_train, self.y_train)
@@ -208,57 +208,57 @@ class Ui_MainWindow(object):
         accuracy = str(self.main.accuracy(self.y_test, predictions))
         accuracy = accuracy[0:4]
         self.naive_bayes_acc_label.setText(accuracy)
-        
-        
-    def k_nearst_neighbour_classify(self):    
+
+
+    def k_nearst_neighbour_classify(self):
         knn = KNNClassifier()
         predictions = knn.predict_classification(self.X_train, self.y_train, self.X_test)
         accuracy = str(self.main.accuracy(self.y_test, predictions))
         accuracy = accuracy[0:4]
         self.knn_acc_label.setText(accuracy)
-    
-    
-    def sklearn_decision_tree_classify(self):    
+
+
+    def sklearn_decision_tree_classify(self):
         dt = SklearnDecisionTree()
         predictions = dt.decision_tree(self.X_train, self.y_train, self.X_test)
         accuracy = str(self.main.accuracy(self.y_test, predictions))
         accuracy = accuracy[0:4]
-        self.decision_tree_acc_label.setText(accuracy)    
-    
-    
-    def sklearn_rf_classify(self):    
+        self.decision_tree_acc_label.setText(accuracy)
+
+
+    def sklearn_rf_classify(self):
         rf = SklearnRandomForest()
         predictions = rf.random_forest(self.X_train, self.y_train, self.X_test)
         accuracy = str(self.main.accuracy(self.y_test, predictions))
         accuracy = accuracy[0:4]
         self.rf_acc_label.setText(accuracy)
-        
+
     def button_signal_submit_custom_input(self):
         self.custom_text = self.custom_input_text_box.toPlainText()
         if len(self.custom_text) > 10:
             custom_input_vector = self.main.custom_input(self.custom_text, self.word_dictionary)
             self.classify_custom_input(custom_input_vector)
-     
-        
+
+
     def classify_custom_input(self, custom_input_vector):
         nb = NaiveBayesClassifier()
         nb.train(self.X_train, self.y_train)
         prediction = nb.predict([custom_input_vector])
         self.custom_text_nb_label.setText(str(prediction[0]))
-        
+
         knn = KNNClassifier()
         prediction = knn.predict_classification(self.X_train, self.y_train, [custom_input_vector])
         self.custom_text_knn_label.setText(str(prediction[0]))
-        
+
         rf = SklearnRandomForest()
         prediction = rf.random_forest(self.X_train, self.y_train, [custom_input_vector])
         self.custom_text_dt_label.setText(str(prediction[0]))
-        
+
         dt = SklearnDecisionTree()
         prediction = dt.decision_tree(self.X_train, self.y_train, [custom_input_vector])
         self.custom_text_rf_label.setText(str(prediction[0]))
-        
-        
+
+
     def fill_the_table(self):
         genre = str(self.comboBox.currentText())
         a, b = self.main.popular_words(self.df, genre)
@@ -266,12 +266,12 @@ class Ui_MainWindow(object):
         self.tableWidget.setVerticalHeaderLabels(a)
         for i in range(0,20):
             self.tableWidget.setItem(i,0, QTableWidgetItem(str(b[i])))
-            
-            
+
+
     def plot_data(self):
         genre = str(self.comboBox.currentText())
         self.main.plot_data(self.df, genre)
-        
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -328,4 +328,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
